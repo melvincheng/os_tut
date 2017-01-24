@@ -1,0 +1,49 @@
+Conceptual Questions 
+1. Write a brief summary of Linux and why you believe it has become so popular in the years since its inception. Provide some examples where the Linux operating system has been used. 
+Linux is the property of and developed by Linus Torvalds. It is an open source operating system that has the GNU license that means this software needs to be free to the public. Linux is a simple OS that a user usually commands through the command line. It’s popular for many companies and businesses because it is highly customizable and there are many different versions for different systems that run in them.  Databases, servers, distributed systems, phones, etc. are all run by Linux.
+
+2. What does it mean for software to be considered "Free" or Open Source, why is this significant?
+Every change and update must legally be public and made available for everyone. Anyone can use and improve the software so it is accessible to many people as new features are added in.
+
+3. What are the benefits of Open Source software, what are the drawbacks? 
+Some benefits of Open Source software are the multitude of updates, bug fixes, improvements and you can reduce the amount of cost and time used to run multiple machines in a distributed system. A couple drawbacks of open source software are deciding which changes and additional features will be added or removed for the software and the bugs that may be produced from the changes.
+
+4. Name an open source license. 
+MIT License
+
+5. Name the three standard streams, their numeric value, and the purpose.
+STDIN     (0) Opens channel for input 
+STDOUT (1) Prints output
+STDERR  (2) Used for redirection to catch and print errors
+
+
+Application Question
+
+1
+mkdir tutorials
+touch tutorial1
+cp tutorial1 tutorial_1
+rm tutorial_1
+
+2
+cd ~ | ln -s ~/work/tutorials/tutorial_1 tutorial_1
+
+3
+grep -r  'stdin' ~/work/tutorials/
+
+4
+find / -name tutorial* 2>errors.log
+
+5
+#!/bin/bash
+ARG1="$1"
+if [ "$ARG1" == "loop" ]
+    then
+    for i in {1..5}
+    do
+        echo $i >> count.log
+        echo $ARG1
+    done;
+fi
+
+ps > process.log

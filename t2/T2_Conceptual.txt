@@ -1,20 +1,24 @@
-1. Some benefits of the C langauge is that it is highly portable as a program written in C can run on different computers with little to no change. Another benefit of the C language is that there are a large number of libraries.
+1. What are some of the benefits of the C language? Name an example where the
+C language is used (hint there are many!).
+Some benefits of the C langauge is that it is highly portable as a program written in C can run on different computers with little to no change. Another benefit of the C language is that there are a large number of libraries. C is used in OS and many fundamental software systems, such as UNIX and LINUX.
 
-2. A compiler is a program that changes source code from one language to another, usually changing it to something called object code to create an executable program
+2. What is a compiler, what does it do?
+A compiler is a program that changes source code from one language to another, usually changing it to something called object code to create an executable program
 
-3. A makefile is usually a file used to "make" or compile your source files. They are very convenient if multiple source files require compiling.
+3. What is a makefile, what does it do?
+A makefile is a file that can be created that allows programmers to easily build, compile, and link their projects using a single command.
 
-4. 
-stdlib.h 	Allows general functionality including but not limited to string to int, and memory allocation
-stdio.h		Allows io
-math.h 		Allows math functions including but not limited to pow, and sqrt
-string.h 	Allows character array manipulation
-time.h 		Allows manipulation of dates and time
+4. Name 5 header files from the C library and explain their purpose.
+stdio.h - Basic input/output operations in a program
+math.h - Includes basic math operations
+stdlib.h - Is the standard template library for c functions
+float.h - Include basic type conversion operations and float-type functions
+string.h - Includes basic string conversion and string-type operations/functions
 
-5.
-
-stdlib.h 	atoi() 		Converts string to integer
-stdio.h 	printf()	outputs formatted string into stdout
-math.h 		sqrt()		Calculates square root
-string.h 	strcat()	Concatenates 2 strings
-time.h 		time()		Current time in seconds from January 1 1970
+5. Lookup one function from each of the header files and put down the function
+name and describe what it does.
+stdlib.h    atoi()      Converts string to integer
+stdio.h     printf()    outputs formatted string into stdout
+math.h      sqrt()      Calculates square root
+string.h    strcat()    Concatenates 2 strings
+time.h      time()      Current time in seconds from January 1 1970

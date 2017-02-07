@@ -14,6 +14,14 @@
 void initialize_game(void)
 {
 	// initialize each question struct and assign it to the questions array
+	questions[0] = {"programming","This statement allows you to check a boolean condition.", "What is an if statement?",100,false};
+	questions[1] = {"algorithms", "This sorting algorithm is O(n^2).", "What is bubble sort?",100,false};
+	questions[2] = {"databases", "This is a prearranged collection of data.", "What is a database.", 100, false};
+	questions[3] = {"programming", "This programming paradigm involves lambda calculus.", "What is functional programming?", 200, false};
+	questions[4] = {"algorithms", "This is the average case performance of quicksort.", "What is O(nlogn)?", 200, false};
+	questions[5] = {"databases", "This person proposed the relational model.", "Who is Edgar F. Codd?", 200, false};
+	questions[6] = 
+
 
 }
 
@@ -21,6 +29,18 @@ void initialize_game(void)
 void display_categories(void)
 {
 	// print categories and dollar values for each unanswered question in questions array
+
+	for(int i = 0; i < NUM_CATEGORIES; i++)
+	{
+		printf("%s\t",categories[i]);
+	}
+	printf("\n");
+	for(int i = 0; i < NUM_QUESTIONS; i++)
+	{
+
+	}
+
+
 	
 }
 

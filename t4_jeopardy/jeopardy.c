@@ -44,6 +44,8 @@ int main(int argc, char *argv[])
 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
 	{
 	// 	// Call functions from the questions and players source files
+		display_categories();
+		
 
 	// 	// Execute the game until all questions are answered
 

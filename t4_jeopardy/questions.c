@@ -14,20 +14,66 @@
 void initialize_game(void)
 {
 	// initialize each question struct and assign it to the questions array
-	questions[0] = struct question("programming","This statement allows you to check a boolean condition.", "an if statement?",100,false);
-	questions[1] = {"algorithms", "This sorting algorithm is O(n^2).", "bubble sort?",100,false};
-	questions[2] = {"databases", "This is a prearranged collection of data.", "a database.", 100, false};
-	questions[3] = {"programming", "This programming paradigm involves lambda calculus.", "functional programming?", 200, false};
-	questions[4] = {"algorithms", "This is the average case performance of quicksort.", "O(nlogn)?", 200, false};
-	questions[5] = {"databases", "This person proposed the relational model.", "Edgar F. Codd?", 200, false};
-	questions[6] = {"programming", "This was the first programming language.", "FORTRAN?", 300, false};
-	questions[7] = {"algorithms", "This form of algorithm makes the locally optimal choice at each step in hopes of a maximized solution.", "a greedy algorithm?", 300, false};
-	questions[8] = {"databases", "This is a query run by a query.", "sub-query?",300,false};
-	questions[9] = {"programming", "This procedure involves a function calling itself until a base case is reached.", "recursion?", 400, false};
-	questions[10] = {"algorithms", "This word is used to describe problems that cannot be realistically solved.", "intractable?", 400, false};
-	questions[11] = {"databases", "This word describes a set of entries with similar attriutes.", "entity type?", 400, false};
-
-
+	strcpy(questions[0].category, "programming");
+	strcpy(questions[0].question, "This statement allows you to check a boolean condition.");
+	strcpy(questions[0].answer, "an if statement?");
+	questions[0].value = 100,
+	questions[0].answered = false;
+	strcpy(questions[1].category, "algorithms");
+	strcpy(questions[1].question, "This sorting algorithm is O(n^2).");
+	strcpy(questions[1].answer, "bubble sort?");
+	questions[1].value = 100,
+	questions[1].answered = false;
+	strcpy(questions[2].category, "databases");
+	strcpy(questions[2].question, "This is a prearranged collection of data.");
+	strcpy(questions[2].answer, "a database.");
+	questions[2].value = 100, 
+	questions[2].answered = false;
+	strcpy(questions[3].category, "programming");
+	strcpy(questions[3].question, "This programming paradigm involves lambda calculus.");
+	strcpy(questions[3].answer, "functional programming?");
+	questions[3].value = 200, 
+	questions[3].answered = false;
+	strcpy(questions[4].category, "algorithms");
+	strcpy(questions[4].question, "This is the average case performance of quicksort.");
+	strcpy(questions[4].answer, "O(nlogn)?");
+	questions[4].value = 200, 
+	questions[4].answered = false;
+	strcpy(questions[5].category, "databases");
+	strcpy(questions[5].question, "This person proposed the relational model.");
+	strcpy(questions[5].answer, "Edgar F. Codd?");
+	questions[5].value = 200, 
+	questions[5].answered = false;
+	strcpy(questions[6].category, "programming");
+	strcpy(questions[6].question, "This was the first programming language.");
+	strcpy(questions[6].answer, "FORTRAN?");
+	questions[6].value = 300, 
+	questions[6].answered = false;
+	strcpy(questions[7].category, "algorithms");
+	strcpy(questions[7].question, "This form of algorithm makes the locally optimal choice at each step in hopes of a maximized solution.");
+	strcpy(questions[7].answer, "a greedy algorithm?");
+	questions[7].value = 300, 
+	questions[7].answered = false;
+	strcpy(questions[8].category, "databases");
+	strcpy(questions[8].question, "This is a query run by a query.");
+	strcpy(questions[8].answer, "sub-query?");
+	questions[8].value = 300,
+	questions[8].answered = false;
+	strcpy(questions[9].category, "programming");
+	strcpy(questions[9].question, "This procedure involves a function calling itself until a base case is reached.");
+	strcpy(questions[9].answer, "recursion?");
+	questions[9].value = 400, 
+	questions[9].answered = false;
+	strcpy(questions[10].category, "algorithms");
+	strcpy(questions[10].question, "This word is used to describe problems that cannot be realistically solved.");
+	strcpy(questions[10].answer, "intractable?");
+	questions[10].value = 400, 
+	questions[10].answered = false;
+	strcpy(questions[11].category, "databases");
+	strcpy(questions[11].question, "This word describes a set of entries with similar attriutes.");
+	strcpy(questions[11].answer, "entity type?");
+	questions[11].value = 400, 
+	questions[11].answered = false;
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered

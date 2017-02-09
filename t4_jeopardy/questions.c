@@ -84,15 +84,13 @@ void display_categories(void)
 	for(int i = 0; i < NUM_CATEGORIES; i++)
 	{
 		printf("%s\t",categories[i]);
+		for(int j = 0; j < NUM_QUESTIONS; j++){
+			if(strcmp(questions[j].category, categories[i]) == 0 && !questions[j].answered){
+				printf("%d\t", questions[j].value);
+			}
+		}
+		printf("\n");
 	}
-	printf("\n");
-	for(int i = 0; i < NUM_QUESTIONS; i++)
-	{
-
-	}
-
-
-	
 }
 
 // Displays the question for the category and dollar value

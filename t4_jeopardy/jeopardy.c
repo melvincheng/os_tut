@@ -43,13 +43,13 @@ int main(int argc, char *argv[])
 	// Perform an infinite loop getting command input from users until game ends
 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
 	{
-	// 	// Call functions from the questions and players source files
+		// Call functions from the questions and players source files
 		display_categories();
 		
 
-	// 	// Execute the game until all questions are answered
+		// Execute the game until all questions are answered
 
-	// 	// Display the final results and exit
+		// Display the final results and exit
 		show_results(players, NUM_PLAYERS);
 	}
 	return EXIT_SUCCESS;
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
 void tokenize(char *input, char **tokens)
 {
-
+	
 }
 
 void show_results(player *players, int num_players)

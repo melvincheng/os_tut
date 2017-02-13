@@ -39,16 +39,22 @@ int main(int argc, char *argv[])
 		strcpy(players[i].name, buffer);
 		players[i].score = 0;
 	}
-
+	display_categories();
 	// Perform an infinite loop getting command input from users until game ends
 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
 	{
-		// Call functions from the questions and players source files
-		display_categories();
+		char **input =  NULL;
+		tokenize(buffer,input);
+		for(int i = 0; i < 2; i++)
+		{
+			printf("%s\n",input[i]);
+		}
 		
 
 		// Execute the game until all questions are answered
 
+		// Call functions from the questions and players source files
+		display_categories();
 		// Display the final results and exit
 		show_results(players, NUM_PLAYERS);
 	}
@@ -57,7 +63,7 @@ int main(int argc, char *argv[])
 
 void tokenize(char *input, char **tokens)
 {
-	
+	tokens = strtok(input," ");
 }
 
 void show_results(player *players, int num_players)

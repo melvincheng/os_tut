@@ -90,8 +90,11 @@ void display_categories(void)
 	{
 		printf("%s\t",categories[i]);
 		for(int j = 0; j < NUM_QUESTIONS; j++){
-			if(strcmp(questions[j].category, categories[i]) == 0 && !questions[j].answered){
-				printf("%d\t", questions[j].value);
+			if(strcmp(questions[j].category, categories[i]) == 0){
+				if(!questions[j].answered)
+					printf("%d\t", questions[j].value);
+				else
+					printf("---\t");
 			}
 		}
 		printf("\n");

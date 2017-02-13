@@ -14,27 +14,79 @@
 void initialize_game(void)
 {
 	// initialize each question struct and assign it to the questions array
-	questions[0] = struct question("programming","This statement allows you to check a boolean condition.", "an if statement?",100,false);
-	questions[1] = {"algorithms", "This sorting algorithm is O(n^2).", "bubble sort?",100,false};
-	questions[2] = {"databases", "This is a prearranged collection of data.", "a database.", 100, false};
-	questions[3] = {"programming", "This programming paradigm involves lambda calculus.", "functional programming?", 200, false};
-	questions[4] = {"algorithms", "This is the average case performance of quicksort.", "O(nlogn)?", 200, false};
-	questions[5] = {"databases", "This person proposed the relational model.", "Edgar F. Codd?", 200, false};
-	questions[6] = {"programming", "This was the first programming language.", "FORTRAN?", 300, false};
-	questions[7] = {"algorithms", "This form of algorithm makes the locally optimal choice at each step in hopes of a maximized solution.", "a greedy algorithm?", 300, false};
-	questions[8] = {"databases", "This is a query run by a query.", "sub-query?",300,false};
-	questions[9] = {"programming", "This procedure involves a function calling itself until a base case is reached.", "recursion?", 400, false};
-	questions[10] = {"algorithms", "This word is used to describe problems that cannot be realistically solved.", "intractable?", 400, false};
-	questions[11] = {"databases", "This word describes a set of entries with similar attriutes.", "entity type?", 400, false};
+	question q;
 
+	strcpy(q.category,"programming");
+	strcpy(q.question,"This statement allows you to check a boolean condition.");
+	strcpy(q.answer,"an if statement?");
+	q.value = 100;
+	q.answered = false;
+	questions[0] = q;
 
+	strcpy(q.category,"algorithms");
+	strcpy(q.question,"This sorting algorithm is O(n^2).");
+	strcpy(q.answer,"bubble sort?");
+	questions[1] = q;
+
+	strcpy(q.category,"databases");
+	strcpy(q.question,"This is a prearranged collection of data.");
+	strcpy(q.answer,"a database?");
+	questions[2] = q;
+
+	strcpy(q.category,"programming");
+	strcpy(q.question,"This programming paradigm is based off of lambda calculus.");
+	strcpy(q.answer,"functional programming?");
+	q.value = 200;
+	questions[3] = q;
+
+	strcpy(q.category,"algorithms");
+	strcpy(q.question,"This is the average case performance of quicksort.");
+	strcpy(q.answer,"O(nlogn)?");
+	questions[4] = q;
+
+	strcpy(q.category,"databases");
+	strcpy(q.question,"This person proposed the relational model.");
+	strcpy(q.answer,"Edgar F. Codd?");
+	questions[5] = q;
+
+	strcpy(q.category,"programming");
+	strcpy(q.question,"This was the first programming language.");
+	strcpy(q.answer, "FORTRAN?");
+	q.value = 300;
+	questions[6] = q;
+
+	strcpy(q.category,"algorithms");
+	strcpy(q.question,"This form of algorithm makes the locally optimal choice at each step in hopes of a maximized solution.");
+	strcpy(q.answer,"a greedy algorithm?");
+	questions[7] = q;
+
+	strcpy(q.category,"databases");
+	strcpy(q.question, "This is a query run by a query.");
+	strcpy(q.answer,"sub-query?");	
+	questions[8] = q;
+
+	strcpy(q.category,"programming");
+	strcpy(q.question, "This procedure involves a function calling itself until a base case is reached.");
+	strcpy(q.answer,"recursion?");
+	q.value = 400;
+	questions[9] = q;
+
+	strcpy(q.category,"algorithms");
+	strcpy(q.question, "This word is used to describe problems that cannot be realistically solved.");
+	strcpy(q.answer,"intractable?");
+	questions[10] = q;
+
+	strcpy(q.category,"databases");
+	strcpy(q.question, "This word describes a set of entries with similar attriutes.");
+	strcpy(q.answer,"entity type?");
+	questions[11] = q;
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
 void display_categories(void)
 {
 	// print categories and dollar values for each unanswered question in questions array
-
+	int v = 100;
 	for(int i = 0; i < NUM_CATEGORIES; i++)
 	{
 		printf("%s\t",categories[i]);
@@ -42,7 +94,12 @@ void display_categories(void)
 	printf("\n");
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-
+		printf("   %d\t\t",v);
+		if(i%3==0)
+		{
+			printf("\n");
+			v+=100;
+		}
 	}
 
 

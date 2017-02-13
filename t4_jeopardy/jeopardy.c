@@ -42,15 +42,7 @@ int main(int argc, char *argv[])
 	display_categories();
 	// Perform an infinite loop getting command input from users until game ends
 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
-	{
-		char **input =  NULL;
-		tokenize(buffer,input);
-		for(int i = 0; i < 2; i++)
-		{
-			printf("%s\n",input[i]);
-		}
-		
-
+	{		
 		// Execute the game until all questions are answered
 
 		// Call functions from the questions and players source files

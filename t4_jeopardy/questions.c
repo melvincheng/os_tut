@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include "questions.h"
 
 // Initializes the array of questions for the game
@@ -18,67 +19,67 @@ void initialize_game(void)
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This statement allows you to check a boolean condition.");
-	strcpy(q.answer,"an if statement?");
+	strcpy(q.answer,"What is an if statement?");
 	q.value = 100;
 	q.answered = false;
 	questions[0] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question,"This sorting algorithm is O(n^2).");
-	strcpy(q.answer,"bubble sort?");
+	strcpy(q.answer,"What is bubble sort?");
 	questions[1] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question,"This is a prearranged collection of data.");
-	strcpy(q.answer,"a database?");
+	strcpy(q.answer,"What is a database?");
 	questions[2] = q;
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This programming paradigm is based off of lambda calculus.");
-	strcpy(q.answer,"functional programming?");
+	strcpy(q.answer,"What is functional programming?");
 	q.value = 200;
 	questions[3] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question,"This is the average case performance of quicksort.");
-	strcpy(q.answer,"O(nlogn)?");
+	strcpy(q.answer,"What is O(nlogn)?");
 	questions[4] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question,"This person proposed the relational model.");
-	strcpy(q.answer,"Edgar F. Codd?");
+	strcpy(q.answer,"Who is Edgar F. Codd?");
 	questions[5] = q;
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This was the first programming language.");
-	strcpy(q.answer, "FORTRAN?");
+	strcpy(q.answer, "What is FORTRAN?");
 	q.value = 300;
 	questions[6] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question,"This form of algorithm makes the locally optimal choice at each step in hopes of a maximized solution.");
-	strcpy(q.answer,"a greedy algorithm?");
+	strcpy(q.answer,"What is a greedy algorithm?");
 	questions[7] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question, "This is a query run by a query.");
-	strcpy(q.answer,"sub-query?");	
+	strcpy(q.answer,"What is sub-query?");	
 	questions[8] = q;
 
 	strcpy(q.category,"programming");
 	strcpy(q.question, "This procedure involves a function calling itself until a base case is reached.");
-	strcpy(q.answer,"recursion?");
+	strcpy(q.answer,"What is recursion?");
 	q.value = 400;
 	questions[9] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question, "This word is used to describe problems that cannot be realistically solved.");
-	strcpy(q.answer,"intractable?");
+	strcpy(q.answer,"What is intractable?");
 	questions[10] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question, "This word describes a set of entries with similar attriutes.");
-	strcpy(q.answer,"entity type?");
+	strcpy(q.answer,"What is entity type?");
 	questions[11] = q;
 }
 
@@ -126,7 +127,7 @@ bool valid_answer(char *category, int value, char *answer)
 		{
 			if(questions[i].value == value)
 			{
-				if(strcmp(questions[i].answer, answer) == 0)
+				if(strcasecmp(questions[i].answer, answer) == 0)
 				{
 					return true;
 				}else{

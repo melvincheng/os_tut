@@ -11,17 +11,17 @@ void *bellcurve(void *grade);
 
 int main(void){
 	float students[5];
-	pthread_t threads[5];
-	pthread_attr_t threads_attr[5];
+	pthread_t threads[NUM_THREAD];
 	printf("Enter the grade of 5 students\n");
 	for(int i = 0; i < 5; i++){
 		scanf("%f", &students[i]);
 	}
-	for(int i = 0; i < 5; i++){
-		pthread_attr_init(&threads_attr[i]);
-		pthread_create(&threads[i], &threads_attr[i], bellcurve, (void*)&students[i]);
+	for(int i = 0; i < NUM_THREAD; i++){
+		pthread_create(&threads[i], NULL, bellcurve, (void*)&students[i]);
 	}
-	pthread_exit(NULL);
+	for(int i = 0; i < NUM_THREAD; i++){
+		pthread_join(threads[i], NULL);
+	}
 }
 
 void *bellcurve(void *grade){

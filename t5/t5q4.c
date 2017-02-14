@@ -5,7 +5,7 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#define NUM_THREAD 5
+#define NUM_THREAD 10
 
 pthread_mutex_t total_grade_mutex;
 float total_grade = 0;
@@ -14,16 +14,16 @@ void* class_total(void* grade);
 
 int main(void){
 	float grades[10];
-	pthread_t threads[NUM_THREAD];
-	pthread_attr_t threads_attr[NUM_THREAD];
+	pthread_t threads[NUM_THREAD] = {0};
 	printf("%s\n", "Please enter 10 grades");
 	for(int i = 0; i < 10; i++){
 		scanf("%f", &grades[i]);
-		pthread_attr_init(&threads_attr[i]);
-		pthread_create(&threads[i], &threads_attr[i], class_total, (void*)&grades[i]);
+		pthread_create(&threads[i], NULL, class_total, (void*)&grades[i]);
 	}
-	pthread_exit(NULL);
-	printf("%f\n", total_grade);
+	for(int i = 0; i < NUM_THREAD; i++){
+		pthread_join(threads[i], NULL);
+	}
+	printf("Total grade: %f\n", total_grade);
 }
 
 void* class_total(void* grade){

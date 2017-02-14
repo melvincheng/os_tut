@@ -13,12 +13,10 @@ void *goodbye();
 int main(void)
 {
 	pthread_t threads[NUM_THREADS];
-	pthread_attr_t threads_attr[NUM_THREADS];
-	pthread_attr_init(&threads_attr[0]);
-	pthread_attr_init(&threads_attr[1]);
-	pthread_create(&threads[0], &threads_attr[0], hello_world, NULL);
-	pthread_create(&threads[1], &threads_attr[1], goodbye, NULL);
-	pthread_exit(NULL);
+	pthread_create(&threads[0], NULL, hello_world, NULL);
+	pthread_create(&threads[1], NULL, goodbye, NULL);
+	pthread_join(threads[0], NULL);
+	pthread_join(threads[1], NULL);
 }
 
 void *hello_world(){

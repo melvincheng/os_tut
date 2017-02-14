@@ -62,10 +62,12 @@ void tokenize(char *input, char **tokens)
 {
 	int i = 0;
 	char* token = strtok(input, " ");
+	printf("%s\n",token );
 	tokens[i++] = token;
 	while(token != NULL)
 	{
 		token = strtok(input," ");
+		printf("%s\n",token );
 		tokens[i++] = token;
 	}
 }

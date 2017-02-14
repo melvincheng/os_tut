@@ -46,14 +46,13 @@ int main(int argc, char *argv[])
 		// Execute the game until all questions are answered
 		char **tokens = NULL;
 		tokenize(buffer,tokens);
-		for(int i = 0; i < 2; i++)
-		{
-			printf("%s\n",tokens[i]);
-		}
+		display_categories(tokens[0],tokens[1]);
+		
+
 		// Call functions from the questions and players source files
 		display_categories();
 		// Display the final results and exit
-		show_results(players, NUM_PLAYERS);
+		show_results(players);
 	}
 	return EXIT_SUCCESS;
 }
@@ -72,7 +71,7 @@ void tokenize(char *input, char **tokens)
 	}
 }
 
-void show_results(player *players, int num_players)
+void show_results(player *players)
 {
 	player temp_player;
 	for(int i = 0; i < NUM_PLAYERS - 1; i++)

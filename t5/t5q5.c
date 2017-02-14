@@ -10,7 +10,7 @@
 pthread_mutex_t total_grade_mutex;
 pthread_mutex_t total_bellcurve_mutex;
 pthread_barrier_t read_barrier;
-pthread_barrier_t calculate_barrier;
+
 float total_grade = 0;
 float total_bellcurve = 0;
 float grades[10];
@@ -24,12 +24,12 @@ int main(void){
 
 	pthread_create(&tid[0], NULL, read_grades, NULL);
 	pthread_barrier_wait(&read_barrier);
-	pthread_barrier_init(&calculate_barrier, NULL, NUM_THREAD + 1);
+	
 	for(int i = 0; i < NUM_THREAD; i++){
 		pthread_create(&tid[i], NULL, save_bellcurve, (void*)&grades[i]);
 	}
 
-	pthread_barrier_wait(&calculate_barrier);
+	
 
 	for(int i = 0; i < NUM_THREAD; i++){
 		pthread_join(tid[i], NULL);
@@ -57,7 +57,7 @@ void * save_bellcurve(void * grade){
 	fprintf(fp, "%f\n", bellcurve);
 	pthread_mutex_unlock(&total_bellcurve_mutex);
 	fclose(fp);
-	pthread_barrier_wait(&calculate_barrier);
+	
 }
 
 void * read_grades(){

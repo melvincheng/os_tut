@@ -29,12 +29,9 @@ int main(void){
 		pthread_create(&tid[i], NULL, save_bellcurve, (void*)&grades[i]);
 	}
 
-	
-
 	for(int i = 0; i < NUM_THREAD; i++){
 		pthread_join(tid[i], NULL);
 	}
-
 	printf("Total grade: %f\n", total_grade);
 	printf("Average before bellcurve: %f\n", total_grade/10);
 	printf("Average after bellcurve: %f\n", total_bellcurve/10);
@@ -57,7 +54,6 @@ void * save_bellcurve(void * grade){
 	fprintf(fp, "%f\n", bellcurve);
 	pthread_mutex_unlock(&total_bellcurve_mutex);
 	fclose(fp);
-	
 }
 
 void * read_grades(){

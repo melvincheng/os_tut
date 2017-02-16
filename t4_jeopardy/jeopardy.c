@@ -33,43 +33,75 @@ int main(int argc, char *argv[])
 	// Prompt for players names
 	printf("Players, please enter your names\n");
 	// initialize each of the players in the array
-	for(int i = 0; i < 4; i++)
-	{
-		fgets(buffer, BUFFER_LEN, stdin);
-		strcpy(players[i].name, buffer);
-		players[i].score = 0;
-	}
+	// for(int i = 0; i < 4; i++)
+	// {
+	// 	fgets(buffer, BUFFER_LEN, stdin);
+	// 	strcpy(players[i].name, buffer);
+	// 	players[i].score = 0;
+	// }
+
+	strcpy(players[0].name, "a");
+	strcpy(players[1].name, "b");
+	strcpy(players[2].name, "c");
+	strcpy(players[3].name, "d");
+	players[0].score = 0;
+	players[1].score = 0;
+	players[2].score = 0;
+	players[3].score = 0;
+
 	display_categories();
-	// Perform an infinite loop getting command input from users until game ends
+	// Perform an infinite loop getting command input from users until game ends	
 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
 	{		
 		// Execute the game until all questions are answered
 		char **tokens = NULL;
-		tokenize(buffer,tokens);
-		for(int i = 0; i < 2; i++)
-		{
-			printf("%s\n",tokens[i]);
-		}
-		// Call functions from the questions and players source files
 		display_categories();
+		tokenize(buffer, tokens);
+		// printf("Please enter a player's name\n");	
+		// if(player_exists(players, NUM_PLAYERS, buffer)){
+		// 	fgets(buffer, BUFFER_LEN, stdin);
+		// 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
+		// 		if(strcmp(buffer, )){
+
+		// 		}
+		// 	}
+		// }
+		// tokenize(buffer,tokens);
+		// for(int i = 0; i < 2; i++)
+		// {
+		// 	printf("%s\n",tokens[i]);
+		// }
+		// Call functions from the questions and players source files
 		// Display the final results and exit
-		show_results(players, NUM_PLAYERS);
 	}
+	show_results(players, NUM_PLAYERS);
 	return EXIT_SUCCESS;
 }
 
 void tokenize(char *input, char **tokens)
 {
 	int i = 0;
+	printf("%s\n", input);
 	char* token = strtok(input, " ");
-	printf("%s\n",token );
-	tokens[i++] = token;
-	while(token != NULL)
-	{
-		token = strtok(input," ");
-		printf("%s\n",token );
-		tokens[i++] = token;
+	if(strcmp(token, "what") || strcmp(token, "who")){
+		// token = strtok(NULL, " ");
+		printf("passed1\n");
+		if(strcmp(token, "is")){
+			printf("passed2\n");
+		}else{
+			return;
+		}
+	}else{
+		return;
 	}
+	// printf("%s\n",token );
+	// tokens[i++] = token;
+	// while(token != NULL)
+	// {
+	// 	token = strtok(input," ");
+	// 	printf("%s\n",token );
+	// 	tokens[i++] = token;
+	// }
 }
 
 void show_results(player *players, int num_players)

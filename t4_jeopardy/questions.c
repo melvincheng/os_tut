@@ -52,7 +52,7 @@ void initialize_game(void)
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This was the first programming language.");
-	strcpy(q.answer, "What is FORTRAN?");
+	strcpy(q.answer, "fortran");
 	q.value = 300;
 	questions[6] = q;
 
@@ -91,7 +91,7 @@ void display_categories(void)
 	{
 		printf("%s\t",categories[i]);
 		for(int j = 0; j < NUM_QUESTIONS; j++){
-			if(strcmp(questions[j].category, categories[i]) == 0){
+			if(strcasecmp(questions[j].category, categories[i]) == 0){
 				if(!questions[j].answered)
 					printf("%d\t", questions[j].value);
 				else
@@ -107,7 +107,7 @@ void display_question(char *category, int value)
 {
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcmp(questions[i].category, category) == 0)
+		if(strcasecmp(questions[i].category, category) == 0)
 		{
 			if(questions[i].value == value)
 			{
@@ -122,20 +122,22 @@ bool valid_answer(char *category, int value, char *answer)
 {
 	// Look into string comparison functions
 	for(int i = 0; i < NUM_QUESTIONS; i++)
-	{
-		if(strcmp(questions[i].category, category) == 0)
+	{	
+		if(strcasecmp(questions[i].category, category) == 0)
 		{
 			if(questions[i].value == value)
 			{
+				printf("%s\n", questions[i].answer);
 				if(strcasecmp(questions[i].answer, answer) == 0)
 				{
 					return true;
 				}else{
-					return false;
+					break;
 				}
 			}
 		}
 	}
+	printf("Answer is incorrect\n");
 	return false;
 }
 
@@ -145,7 +147,7 @@ bool already_answered(char *category, int value)
 	// lookup the question and see if it's already been marked as answered
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcmp(questions[i].category, category) == 0)
+		if(strcasecmp(questions[i].category, category) == 0)
 		{
 			if(questions[i].value == value)
 			{

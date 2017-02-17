@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 #include "questions.h"
 #include "players.h"
 #include "jeopardy.h"
@@ -26,6 +27,10 @@ int main(int argc, char *argv[])
 	
 	// Input buffer and and commands
 	char buffer[BUFFER_LEN] = { 0 };
+	char **tokens[3][BUFFER_LEN];
+
+	char category_entered[BUFFER_LEN];
+	int value_entered;
 
 	// Display the game introduction and initialize the questions
 	initialize_game();
@@ -50,64 +55,60 @@ int main(int argc, char *argv[])
 	players[3].score = 0;
 
 	display_categories();
+	printf("Please enter a player's name\n");
 	// Perform an infinite loop getting command input from users until game ends	
 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
 	{		
 		// Execute the game until all questions are answered
-		char **tokens = NULL;
-		display_categories();
-		tokenize(buffer, tokens);
-		// printf("Please enter a player's name\n");	
-		// if(player_exists(players, NUM_PLAYERS, buffer)){
-		// 	fgets(buffer, BUFFER_LEN, stdin);
-		// 	while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
-		// 		if(strcmp(buffer, )){
 
-		// 		}
-		// 	}
-		// }
-		// tokenize(buffer,tokens);
-		// for(int i = 0; i < 2; i++)
-		// {
-		// 	printf("%s\n",tokens[i]);
-		// }
+		if(player_exists(players, NUM_PLAYERS, strtok(buffer, "\n"))){
+			
+			printf("Please enter the value\n");
+			while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
+				value_entered = atoi(buffer);
+				if(already_answered(category_entered, value_entered)){
+					printf("Question has already been answered or question does not exist\n");
+				} else {
+					break;
+				}
+				printf("Please enter the value\n");
+			}
+			display_question(category_entered, value_entered);
+			while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
+				tokenize(buffer, tokens);
+				if(valid_answer(category_entered, value_entered, **tokens)){
+					break;
+				}
+				display_question(category_entered, value_entered);
+			}
+		}
+		display_categories();
 		// Call functions from the questions and players source files
-		// Display the final results and exit
 	}
+	// Display the final results and exit
 	show_results(players, NUM_PLAYERS);
 	return EXIT_SUCCESS;
 }
 
 void tokenize(char *input, char **tokens)
-{
-	int i = 0;
-	printf("%s\n", input);
-	char* token = strtok(input, " ");
-	if(strcmp(token, "what") || strcmp(token, "who")){
-		// token = strtok(NULL, " ");
-		printf("passed1\n");
-		if(strcmp(token, "is")){
-			printf("passed2\n");
-		}else{
+{	
+	*tokens = strtok(input, " ");
+	if(strcasecmp(*tokens, "what") == 0 || strcasecmp(*tokens, "who") == 0){
+		*tokens = strtok(NULL, " ");
+		printf("%s\n", *tokens);
+		if(strcasecmp(*tokens, "is") == 0){
+			*tokens = strtok(NULL, " ?\n");
+			printf("%s\n", *tokens);
 			return;
 		}
-	}else{
-		return;
 	}
-	// printf("%s\n",token );
-	// tokens[i++] = token;
-	// while(token != NULL)
-	// {
-	// 	token = strtok(input," ");
-	// 	printf("%s\n",token );
-	// 	tokens[i++] = token;
-	// }
+	printf("Answer is incorrect\n");
 }
 
 void show_results(player *players, int num_players)
 {
 	player temp_player;
-	for(int i = 0; i < NUM_PLAYERS - 1; i++)
+	for(int i = 0; i < num_players - 1; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
@@ -123,5 +124,20 @@ void show_results(player *players, int num_players)
 	for(int i = 0; i < NUM_PLAYERS; i++)
 	{
 		printf("%s %d\n", players[i].name, players[i].score);
+	}
+}
+
+bool valid_category(char *category, char **category_entered){
+	printf("Please enter a category\n");
+	while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
+		strcpy(category_entered, buffer);
+		for(int i = 0; i < NUM_CATEGORIES; i++){
+			if(strcasecmp(strtok(category_entered, "\n"), categories[i]) == 0){
+				break;
+			}else if(i == NUM_CATEGORIES - 1){
+				printf("Category entered does not exist\n");
+				printf("Please enter a category\n");
+			}
+		}
 	}
 }

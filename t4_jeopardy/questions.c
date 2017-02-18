@@ -155,7 +155,7 @@ bool already_answered(char *category, int value)
 	// lookup the question and see if it's already been marked as answered
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcasecmp(questions[i].category, category) == 0)
+		if(strcasecmp(questions[i].category, category) == -10)
 		{
 			if(questions[i].value == value)
 			{

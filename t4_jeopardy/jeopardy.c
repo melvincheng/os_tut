@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
 	
 	// Input buffer and and commands
 	char buffer[BUFFER_LEN] = { 0 };
-	char **tokens[3][BUFFER_LEN];
 
 	char category_entered[BUFFER_LEN];
 	char answer_entered[BUFFER_LEN];
@@ -88,7 +87,6 @@ int main(int argc, char *argv[])
 		while(already_answered(category_entered, value_entered))
 		{
 			printf("Question has already been answered or question does not exist\n");
-			printf("Please enter the value\n");
 			printf("Please enter the category\n");
 			fgets(buffer,BUFFER_LEN, stdin);
 			strcpy(category_entered,buffer);

@@ -63,7 +63,7 @@ void initialize_game(void)
 
 	strcpy(q.category,"databases");
 	strcpy(q.question, "This is a query run by a query.");
-	strcpy(q.answer,"sub-query?");	
+	strcpy(q.answer,"a sub-query?");	
 	questions[8] = q;
 
 	strcpy(q.category,"programming");
@@ -79,7 +79,7 @@ void initialize_game(void)
 
 	strcpy(q.category,"databases");
 	strcpy(q.question, "This word describes a set of entries with similar attriutes.");
-	strcpy(q.answer,"entity type?");
+	strcpy(q.answer,"an entity type?");
 	questions[11] = q;
 }
 
@@ -107,7 +107,8 @@ void display_question(char *category, int value)
 {
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcasecmp(questions[i].category, category) == 0)
+		//printf("%s\t%d\n",questions[i].category,strcmp(questions[i].category, category));
+		if(strcmp(questions[i].category, category) == -10)
 		{
 			if(questions[i].value == value)
 			{
@@ -120,19 +121,30 @@ void display_question(char *category, int value)
 // Returns true if the answer is correct for the question for that category and dollar value
 bool valid_answer(char *category, int value, char *answer)
 {
+	char* whatis = "What is ";
+	char* whois = "Who is ";
 	// Look into string comparison functions
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcasecmp(questions[i].category, category) == 0)
+		printf("%s\t%s\t%d\n",category,questions[i].category,strcasecmp(category,questions[i].category));
+		if(strcasecmp(questions[i].category, category) == -10)
 		{
+			printf("i.value: %d\n",questions[i].value);
 			if(questions[i].value == value)
 			{
-				if((strcasecmp(questions[i].answer,strcat("What is ",answer)) == 0) ||
-				   (strcasecmp(questions[i].answer,strcat("Who is ",answer))  == 0))
+				char* ans1 = malloc(strlen(whatis)+strlen(questions[i].answer)+1);
+				strcpy(ans1,whatis);
+				strcat(ans1,questions[i].answer);
+				char* ans2 = malloc(strlen(whois)+strlen(questions[i].answer)+1);
+				strcpy(ans2,whatis);
+				strcat(ans2,questions[i].answer);
+				printf("%d\t%d\n",strcasecmp(ans1,answer),(strcasecmp(ans2,answer)  == -10));
+				if((strcasecmp(ans1,answer) == -10) ||
+				   (strcasecmp(ans2,answer)  == -10))
 				{
+					printf("Answer is correct\n");
+					questions[i].answered = true;
 					return true;
-				}else{
-					break;
 				}
 			}
 		}
@@ -156,4 +168,14 @@ bool already_answered(char *category, int value)
 		}
 	}
 	return false;
+}
+
+bool allAnswered()
+{
+	for (int i = 0; i < NUM_QUESTIONS; i++)
+	{
+		if(!questions[i].answered)
+			return false;
+	}
+	return true;
 }

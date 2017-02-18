@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include "players.h"
 
 // Returns true if the player name matches one of the existing players
@@ -15,7 +16,7 @@ bool player_exists(player *players, int num_players, char *name)
 {
 	for(int i = 0; i < num_players; i++)
 	{
-		if(strcmp(players[i].name, name) == 0)
+		if(strcasecmp(players[i].name, name) == -10)
 		{
 			return true;
 		}
@@ -30,7 +31,7 @@ void update_score(player *players, int num_players, char *name, int score)
 {
 	for(int i = 0; i < num_players; i++)
 	{
-		if(strcmp(players[i].name, name) == 0)
+		if(strcasecmp(players[i].name, name) == -10)
 		{
 			players[i].score += score;
 			break;

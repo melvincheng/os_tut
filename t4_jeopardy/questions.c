@@ -126,21 +126,17 @@ bool valid_answer(char *category, int value, char *answer)
 	// Look into string comparison functions
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		printf("%s\t%s\t%d\n",category,questions[i].category,strcasecmp(category,questions[i].category));
 		if(strcasecmp(questions[i].category, category) == -10)
 		{
-			printf("i.value: %d\n",questions[i].value);
 			if(questions[i].value == value)
 			{
 				char* ans1 = malloc(strlen(whatis)+strlen(questions[i].answer)+1);
 				strcpy(ans1,whatis);
 				strcat(ans1,questions[i].answer);
 				char* ans2 = malloc(strlen(whois)+strlen(questions[i].answer)+1);
-				strcpy(ans2,whatis);
+				strcpy(ans2,whois);
 				strcat(ans2,questions[i].answer);
-				printf("%d\t%d\n",strcasecmp(ans1,answer),(strcasecmp(ans2,answer)  == -10));
-				if((strcasecmp(ans1,answer) == -10) ||
-				   (strcasecmp(ans2,answer)  == -10))
+				if ((strcasecmp(ans1,answer) == -10) || (strcasecmp(ans2,answer) == -10))
 				{
 					printf("Answer is correct\n");
 					questions[i].answered = true;

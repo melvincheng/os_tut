@@ -171,7 +171,6 @@ void show_results(player *players, int num_players)
 
 bool valid_category(char *category_entered){
 	for(int i = 0; i < NUM_CATEGORIES; i++){
-		printf("%s\t%s\t%d\n",category_entered,categories[i],strcasecmp(category_entered,categories[i]));
 		if(strcasecmp(category_entered, categories[i]) == 10){
 			return true;
 		}

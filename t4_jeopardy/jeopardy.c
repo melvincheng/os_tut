@@ -10,10 +10,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
-<<<<<<< HEAD
-=======
 #include <strings.h>
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 #include "questions.h"
 #include "players.h"
 #include "jeopardy.h"
@@ -31,14 +28,10 @@ int main(int argc, char *argv[])
 	
 	// Input buffer and and commands
 	char buffer[BUFFER_LEN] = { 0 };
-	char **tokens[3][BUFFER_LEN];
 
 	char category_entered[BUFFER_LEN];
-<<<<<<< HEAD
-=======
 	char answer_entered[BUFFER_LEN];
 	char entered_player[BUFFER_LEN];
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 	int value_entered;
 
 	// Display the game introduction and initialize the questions
@@ -46,15 +39,6 @@ int main(int argc, char *argv[])
 
 	// Prompt for players names
 	printf("Players, please enter your names\n");
-<<<<<<< HEAD
-	// initialize each of the players in the array
-	// for(int i = 0; i < 4; i++)
-	// {
-	// 	fgets(buffer, BUFFER_LEN, stdin);
-	// 	strcpy(players[i].name, buffer);
-	// 	players[i].score = 0;
-	// }
-=======
 	//initialize each of the players in the array
 	for(int i = 0; i < NUM_PLAYERS; i++)
 	{
@@ -74,35 +58,6 @@ int main(int argc, char *argv[])
 	players[3].score = 0;
 
 	display_categories();
-<<<<<<< HEAD
-	printf("Please enter a player's name\n");
-	// Perform an infinite loop getting command input from users until game ends	
-	while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
-	{		
-		// Execute the game until all questions are answered
-
-		if(player_exists(players, NUM_PLAYERS, strtok(buffer, "\n"))){
-			
-			printf("Please enter the value\n");
-			while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
-				value_entered = atoi(buffer);
-				if(already_answered(category_entered, value_entered)){
-					printf("Question has already been answered or question does not exist\n");
-				} else {
-					break;
-				}
-				printf("Please enter the value\n");
-			}
-			display_question(category_entered, value_entered);
-			while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
-				tokenize(buffer, tokens);
-				if(valid_answer(category_entered, value_entered, **tokens)){
-					break;
-				}
-				display_question(category_entered, value_entered);
-			}
-		}
-=======
 	//loop until all questions are answered
 	while(!allAnswered())
 	{
@@ -133,7 +88,6 @@ int main(int argc, char *argv[])
 		while(already_answered(category_entered, value_entered))
 		{
 			printf("Question has already been answered or question does not exist\n");
-			printf("Please enter the value\n");
 			printf("Please enter the category\n");
 			fgets(buffer,BUFFER_LEN, stdin);
 			strcpy(category_entered,buffer);
@@ -169,7 +123,6 @@ int main(int argc, char *argv[])
 				strcpy(answer_entered,buffer);
 			}
 		update_score(players,NUM_PLAYERS,entered_player,value_entered);
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 		display_categories();
 		// Call functions from the questions and players source files
 	}
@@ -190,11 +143,7 @@ void tokenize(char *input, char **tokens)
 			return;
 		}
 	}
-<<<<<<< HEAD
-	printf("Answer is incorrect\n");
-=======
 	printf("incorrect input\n");
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 }
 
 void show_results(player *players, int num_players)
@@ -219,21 +168,6 @@ void show_results(player *players, int num_players)
 	}
 }
 
-<<<<<<< HEAD
-bool valid_category(char *category, char **category_entered){
-	printf("Please enter a category\n");
-	while (fgets(buffer, BUFFER_LEN, stdin) != NULL){
-		strcpy(category_entered, buffer);
-		for(int i = 0; i < NUM_CATEGORIES; i++){
-			if(strcasecmp(strtok(category_entered, "\n"), categories[i]) == 0){
-				break;
-			}else if(i == NUM_CATEGORIES - 1){
-				printf("Category entered does not exist\n");
-				printf("Please enter a category\n");
-			}
-		}
-	}
-=======
 bool valid_category(char *category_entered){
 	for(int i = 0; i < NUM_CATEGORIES; i++){
 		if(strcasecmp(category_entered, categories[i]) == 10){
@@ -243,5 +177,4 @@ bool valid_category(char *category_entered){
 	printf("Category entered does not exist\n");
 	printf("Please enter a category\n");
 	return false;
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 }

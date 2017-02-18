@@ -52,11 +52,7 @@ void initialize_game(void)
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This was the first programming language.");
-<<<<<<< HEAD
-	strcpy(q.answer, "fortran");
-=======
 	strcpy(q.answer, "FORTRAN?");
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 	q.value = 300;
 	questions[6] = q;
 
@@ -111,12 +107,8 @@ void display_question(char *category, int value)
 {
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-<<<<<<< HEAD
-		if(strcasecmp(questions[i].category, category) == 0)
-=======
 		//printf("%s\t%d\n",questions[i].category,strcmp(questions[i].category, category));
 		if(strcmp(questions[i].category, category) == -10)
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 		{
 			if(questions[i].value == value)
 			{
@@ -133,15 +125,6 @@ bool valid_answer(char *category, int value, char *answer)
 	char* whois = "Who is ";
 	// Look into string comparison functions
 	for(int i = 0; i < NUM_QUESTIONS; i++)
-<<<<<<< HEAD
-	{	
-		if(strcasecmp(questions[i].category, category) == 0)
-		{
-			if(questions[i].value == value)
-			{
-				printf("%s\n", questions[i].answer);
-				if(strcasecmp(questions[i].answer, answer) == 0)
-=======
 	{
 		if(strcasecmp(questions[i].category, category) == -10)
 		{
@@ -154,16 +137,10 @@ bool valid_answer(char *category, int value, char *answer)
 				strcpy(ans2,whois);
 				strcat(ans2,questions[i].answer);
 				if ((strcasecmp(ans1,answer) == -10) || (strcasecmp(ans2,answer) == -10))
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 				{
 					printf("Answer is correct\n");
 					questions[i].answered = true;
 					return true;
-<<<<<<< HEAD
-				}else{
-					break;
-=======
->>>>>>> b951fcdad1f971a7dd5160d3721f80c0813dbedb
 				}
 			}
 		}
@@ -178,7 +155,7 @@ bool already_answered(char *category, int value)
 	// lookup the question and see if it's already been marked as answered
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcasecmp(questions[i].category, category) == 0)
+		if(strcasecmp(questions[i].category, category) == -10)
 		{
 			if(questions[i].value == value)
 			{

@@ -19,67 +19,67 @@ void initialize_game(void)
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This statement allows you to check a boolean condition.");
-	strcpy(q.answer,"What is an if statement?");
+	strcpy(q.answer,"an if statement?");
 	q.value = 100;
 	q.answered = false;
 	questions[0] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question,"This sorting algorithm is O(n^2).");
-	strcpy(q.answer,"What is bubble sort?");
+	strcpy(q.answer,"bubble sort?");
 	questions[1] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question,"This is a prearranged collection of data.");
-	strcpy(q.answer,"What is a database?");
+	strcpy(q.answer,"a database?");
 	questions[2] = q;
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This programming paradigm is based off of lambda calculus.");
-	strcpy(q.answer,"What is functional programming?");
+	strcpy(q.answer,"functional programming?");
 	q.value = 200;
 	questions[3] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question,"This is the average case performance of quicksort.");
-	strcpy(q.answer,"What is O(nlogn)?");
+	strcpy(q.answer,"O(nlogn)?");
 	questions[4] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question,"This person proposed the relational model.");
-	strcpy(q.answer,"Who is Edgar F. Codd?");
+	strcpy(q.answer,"Edgar F. Codd?");
 	questions[5] = q;
 
 	strcpy(q.category,"programming");
 	strcpy(q.question,"This was the first programming language.");
-	strcpy(q.answer, "What is FORTRAN?");
+	strcpy(q.answer, "FORTRAN?");
 	q.value = 300;
 	questions[6] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question,"This form of algorithm makes the locally optimal choice at each step in hopes of a maximized solution.");
-	strcpy(q.answer,"What is a greedy algorithm?");
+	strcpy(q.answer,"a greedy algorithm?");
 	questions[7] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question, "This is a query run by a query.");
-	strcpy(q.answer,"What is sub-query?");	
+	strcpy(q.answer,"sub-query?");	
 	questions[8] = q;
 
 	strcpy(q.category,"programming");
 	strcpy(q.question, "This procedure involves a function calling itself until a base case is reached.");
-	strcpy(q.answer,"What is recursion?");
+	strcpy(q.answer,"recursion?");
 	q.value = 400;
 	questions[9] = q;
 
 	strcpy(q.category,"algorithms");
 	strcpy(q.question, "This word is used to describe problems that cannot be realistically solved.");
-	strcpy(q.answer,"What is intractable?");
+	strcpy(q.answer,"intractable?");
 	questions[10] = q;
 
 	strcpy(q.category,"databases");
 	strcpy(q.question, "This word describes a set of entries with similar attriutes.");
-	strcpy(q.answer,"What is entity type?");
+	strcpy(q.answer,"entity type?");
 	questions[11] = q;
 }
 
@@ -91,7 +91,7 @@ void display_categories(void)
 	{
 		printf("%s\t",categories[i]);
 		for(int j = 0; j < NUM_QUESTIONS; j++){
-			if(strcmp(questions[j].category, categories[i]) == 0){
+			if(strcasecmp(questions[j].category, categories[i]) == 0){
 				if(!questions[j].answered)
 					printf("%d\t", questions[j].value);
 				else
@@ -107,7 +107,7 @@ void display_question(char *category, int value)
 {
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcmp(questions[i].category, category) == 0)
+		if(strcasecmp(questions[i].category, category) == 0)
 		{
 			if(questions[i].value == value)
 			{
@@ -123,19 +123,21 @@ bool valid_answer(char *category, int value, char *answer)
 	// Look into string comparison functions
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcmp(questions[i].category, category) == 0)
+		if(strcasecmp(questions[i].category, category) == 0)
 		{
 			if(questions[i].value == value)
 			{
-				if(strcasecmp(questions[i].answer, answer) == 0)
+				if((strcasecmp(questions[i].answer,strcat("What is ",answer)) == 0) ||
+				   (strcasecmp(questions[i].answer,strcat("Who is ",answer))  == 0))
 				{
 					return true;
 				}else{
-					return false;
+					break;
 				}
 			}
 		}
 	}
+	printf("Answer is incorrect\n");
 	return false;
 }
 
@@ -145,7 +147,7 @@ bool already_answered(char *category, int value)
 	// lookup the question and see if it's already been marked as answered
 	for(int i = 0; i < NUM_QUESTIONS; i++)
 	{
-		if(strcmp(questions[i].category, category) == 0)
+		if(strcasecmp(questions[i].category, category) == 0)
 		{
 			if(questions[i].value == value)
 			{

@@ -29,9 +29,9 @@ int main(int argc, char *argv[])
 	// Input buffer and and commands
 	char buffer[BUFFER_LEN] = { 0 };
 
-	char category_entered[BUFFER_LEN];
-	char answer_entered[BUFFER_LEN];
-	char entered_player[BUFFER_LEN];
+	char category_entered[BUFFER_LEN] = { 0 };
+	char answer_entered[BUFFER_LEN] = { 0 };
+	char entered_player[BUFFER_LEN] = { 0 };
 	int value_entered;
 
 	// Display the game introduction and initialize the questions
@@ -43,18 +43,9 @@ int main(int argc, char *argv[])
 	for(int i = 0; i < NUM_PLAYERS; i++)
 	{
 		fgets(buffer, BUFFER_LEN, stdin);
-	 	strcpy(players[i].name, buffer);
+	 	strcpy(players[i].name, strtok(buffer, "\n"));
 	 	players[i].score = 0;
 	}
-
-	strcpy(players[0].name, "a");
-	strcpy(players[1].name, "b");
-	strcpy(players[2].name, "c");
-	strcpy(players[3].name, "d");
-	players[0].score = 0;
-	players[1].score = 0;
-	players[2].score = 0;
-	players[3].score = 0;
 
 	display_categories();
 	//loop until all questions are answered
@@ -63,63 +54,67 @@ int main(int argc, char *argv[])
 		//ask for player name until valid player name is inputted
 		printf("Please enter a player's name\n");
 		fgets(buffer,BUFFER_LEN, stdin);
-		strcpy(entered_player, buffer);
+		strcpy(entered_player, strtok(buffer, "\n"));
 		while(!player_exists(players,NUM_PLAYERS,entered_player))
 		{
 			printf("Please enter a player's name\n");
 			fgets(buffer,BUFFER_LEN, stdin);
-			strcpy(entered_player, buffer);	
+			if(strtok(buffer, "\n")){
+				strcpy(entered_player, strtok(buffer, "\n"));
+			}
 		}
 		//ask player for question category
 		printf("Please enter the category\n");
 		fgets(buffer,BUFFER_LEN, stdin);
-		strcpy(category_entered,buffer);
-		while(valid_category(category_entered) != true)
+		strcpy(category_entered, strtok(buffer, "\n"));
+		while(!valid_category(category_entered))
 		{
 			fgets(buffer,BUFFER_LEN, stdin);
-			strcpy(category_entered,buffer);
+			strcpy(category_entered, strtok(buffer, "\n"));
 		}
 		//ask player for question value
 		printf("Please enter the value\n");
 		fgets(buffer,BUFFER_LEN,stdin);
-		value_entered = atoi(buffer);
+		value_entered = atoi(strtok(buffer, "\n"));
 		//loop until unanswered question is chosen
 		while(already_answered(category_entered, value_entered))
 		{
 			printf("Question has already been answered or question does not exist\n");
 			printf("Please enter the category\n");
 			fgets(buffer,BUFFER_LEN, stdin);
-			strcpy(category_entered,buffer);
-			while(valid_category(category_entered) != true)
+			strcpy(category_entered, strtok(buffer, "\n"));
+			while(!valid_category(category_entered))
 			{
 				fgets(buffer,BUFFER_LEN, stdin);
-				strcpy(category_entered,buffer);
+				if(strtok(buffer, "\n")){
+					strcpy(category_entered, strtok(buffer, "\n"));
+				}
 			}
 			printf("Please enter the value\n");
 			fgets(buffer,BUFFER_LEN,stdin);
-			value_entered = atoi(buffer);
+			value_entered = atoi(strtok(buffer, "\n"));
 		}
 		//display chosen question
 		display_question(category_entered, value_entered);
 		//loop until a player answers the question
 		printf("Please enter your answer\n");
 		fgets(buffer, BUFFER_LEN, stdin);
-		strcpy(answer_entered,buffer);
+		strcpy(answer_entered, strtok(buffer, "\n"));
 		while (!valid_answer(category_entered,value_entered,answer_entered)){
 				update_score(players,NUM_PLAYERS,entered_player,-1*value_entered);
 				display_question(category_entered, value_entered);
 				printf("Please enter a player's name\n");
 				fgets(buffer,BUFFER_LEN, stdin);
-				strcpy(entered_player, buffer);
+				strcpy(entered_player,  strtok(buffer, "\n"));
 				while(!player_exists(players,NUM_PLAYERS,entered_player))
 				{
 					printf("Please enter a player's name\n");
 					fgets(buffer,BUFFER_LEN, stdin);
-					strcpy(entered_player, buffer);	
+					strcpy(entered_player,  strtok(buffer, "\n"));	
 				}
 				printf("Please enter your answer\n");
 				fgets(buffer, BUFFER_LEN, stdin);
-				strcpy(answer_entered,buffer);
+				strcpy(answer_entered, strtok(buffer, "\n"));
 			}
 		update_score(players,NUM_PLAYERS,entered_player,value_entered);
 		display_categories();
@@ -152,7 +147,7 @@ void show_results(player *players, int num_players)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if(players[i].score > players[i+1].score)
+			if(players[i].score < players[i+1].score)
 			{
 				temp_player = players[i];
 				players[i] = players[i + 1];
@@ -167,13 +162,3 @@ void show_results(player *players, int num_players)
 	}
 }
 
-bool valid_category(char *category_entered){
-	for(int i = 0; i < NUM_CATEGORIES; i++){
-		if(strcasecmp(category_entered, categories[i]) == 10){
-			return true;
-		}
-	}
-	printf("Category entered does not exist\n");
-	printf("Please enter a category\n");
-	return false;
-}

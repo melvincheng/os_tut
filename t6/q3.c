@@ -48,7 +48,6 @@ void factorial(void* fa)
 			sem_post(&sum_sem);
 		}
 	}
-
 }
 
 int main(void)

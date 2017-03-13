@@ -23,7 +23,9 @@ typedef struct queue
 
 }Queue;
 
-void push(Queue* q, proc process)
+Queue* q;
+
+void push(proc process)
 {
 	Queue* curr = q;
 	while(curr->next != NULL)
@@ -33,7 +35,7 @@ void push(Queue* q, proc process)
 	curr->next->next = NULL;
 }
 
-void printqueue(Queue* q)
+void printqueue()
 {
 	if(q == NULL)
 		printf("Queue is empty.\n");
@@ -59,7 +61,7 @@ void printqueue(Queue* q)
 
 int main(void)
 {
-	Queue* q = NULL;
+	q = NULL;
 	FILE* f = fopen("processes.txt", "r");
 	const char s[2] = ", ";
 	char* token;
@@ -97,9 +99,9 @@ int main(void)
 				q->next = NULL;
 			}
 			else
-				push(q,p);
+				push(p);
 		}
 	}
 	fclose(f);
-	printqueue(q);
+	printqueue();
 }

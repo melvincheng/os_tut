@@ -50,12 +50,13 @@ proc pop()
 	{
 		Queue* curr = q;
 		while(curr->next->next != NULL)
-		{
+		{;
 			curr = curr->next;
 		}
 		p = curr->next->process;
 		curr->next = NULL;
 	}
+	printf("\npopping %s\n",p.name);
 	return p;
 }
 
@@ -88,7 +89,7 @@ proc delete_pid(int pid)
 {
 	proc p;
 	printf("deleting %d\n",pid);
-	if(q->process.pid == pid)
+	if(q->process.pid== pid)
 	{
 		Queue* next = q->next;
 		p = q->process;
@@ -135,7 +136,7 @@ void printqueue()
 int main(void)
 {
 	q = NULL;
-	FILE* f = fopen("processes.txt", "r");
+	FILE* f = fopen("processes_q5.txt", "r");
 	const char s[2] = ", ";
 	char* token;
 	if(f != NULL)
@@ -145,7 +146,7 @@ int main(void)
 		{
 			token = strtok(line,s);
 			proc p;
-			for(int i = 0; i < 4; i++)
+			for(int i = 0; i < 3; i++)
 			{
 				if(i == 0)
 				{
@@ -157,13 +158,11 @@ int main(void)
 					p.priority = atoi(token);
 					token = strtok(NULL,s);
 				}
-				else if(i == 2)
-				{
-					p.pid = atoi(token);
-					token = strtok(NULL,s);
-				}
 				else
+				{
+					p.pid = 0;
 					p.runtime = atoi(token);
+				}
 			}
 			if(q == NULL)
 			{
@@ -176,15 +175,54 @@ int main(void)
 		}
 	}
 	fclose(f);
-	delete_name("emacs");
-	delete_pid(12235);
+	Queue* curr = q;
+	pid_t pid;
+	proc p;
+	while(curr->next != NULL)
+	{
+		if(curr->process.priority == 0)
+		{	
+			int status;
+			char path[50];
+			strcpy(path, "/bin/ ");
+			p = delete_name(curr->process.name);
+			strcat(path,p.name);
+			printf("path: %s\n",path);
+			pid = fork();
+			if(!pid)
+			{
+				p.pid = execlp(path, path, NULL);
+				sleep(p.runtime);
+			}
+			kill(pid,SIGINT);
+
+			while((pid = wait(&status)) > 0);
+			printf("Process: %s\n",p.name);
+			printf("Priority: %d\n",p.priority);
+			printf("PID: %d\n",p.pid);
+			printf("Runtime: %d\n", p.runtime);
+			curr = curr->next;
+		}
+		else
+			curr = curr->next;
+	}
 	while(q != NULL)
 	{
-		proc p = pop();
+		p = pop();
+		int status;
+		char path[50];
+		strcpy(path, "/bin/");
+		p = delete_name(curr->process.name);
+		strcat(path,p.name);
+		pid = fork();
+		p.pid = execlp(path, path, NULL);
+		sleep(p.runtime);
+		kill(pid,SIGINT);
+		while((pid = wait(&status)) > 0);
 		printf("Process: %s\n",p.name);
 		printf("Priority: %d\n",p.priority);
 		printf("PID: %d\n",p.pid);
-		printf("Runtime: %d\n",p.runtime);
-		printf("\n");
+		printf("Runtime: %d\n", p.runtime);
+
 	}
-}
+}	

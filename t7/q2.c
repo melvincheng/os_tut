@@ -35,6 +35,7 @@ void push(proc process)
 	curr->next->next = NULL;
 }
 
+
 proc pop()
 {
 	proc p;
@@ -48,14 +49,12 @@ proc pop()
 	}
 	else
 	{
-		Queue* curr = q;
-		while(curr->next->next != NULL)
-		{
-			curr = curr->next;
-		}
-		p = curr->next->process;
-		curr->next = NULL;
+		Queue* head = q->next;
+		p = q->process;
+		q = NULL;
+		q = head;
 	}
+	printf("\npopping %s\n",p.name);
 	return p;
 }
 

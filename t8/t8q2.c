@@ -12,7 +12,7 @@
 typedef struct{
 	char name[256];
 	int priority;
-	int pid;
+	pid_t pid;
 	int address;
 	int memory;
 	int runtime;
@@ -61,7 +61,7 @@ int main(void){
 			return 0;
 		}else{
 			temp_proc->pid = pid;
-			printf("%s %d %d %d %d\n", temp_proc->name, temp_proc->priority, temp_proc->pid, temp_proc->memory, temp_proc->runtime);
+			printf("Name: %s\n Priority: %d\n Pid: %d\n Memory: %d\n Runtime: %d\n", temp_proc->name, temp_proc->priority, temp_proc->pid, temp_proc->memory, temp_proc->runtime);
 			sleep(temp_proc->runtime);
 			kill(temp_proc->pid, SIGINT);
 			waitpid(temp_proc->pid, &status, 0);
@@ -73,20 +73,21 @@ int main(void){
 	}
 
 	temp_proc = pop(&secondary);
+	printf("%s\n", temp_proc->name);
 	while(temp_proc != NULL){
-		if(temp_proc->pid != 0){
+		if(temp_proc->pid == 0){
 			pid = fork();
 			if(pid < 0){
 				return 1;
 			}else if(pid == 0){
 				execl("process", NULL);
 			}else{
-				printf("%s %d %d %d %d\n", temp_proc->name, temp_proc->priority, temp_proc->pid, temp_proc->memory, temp_proc->runtime);
 				temp_proc->pid = pid;
+				printf("Name: %s\n Priority: %d\n Pid: %d\n Memory: %d\n Runtime: %d\n", temp_proc->name, temp_proc->priority, temp_proc->pid, temp_proc->memory, temp_proc->runtime);
 				temp_proc->runtime--;
 				temp_proc->suspended = true;
-				push(&secondary, *temp_proc);
 				kill(temp_proc->pid, SIGTSTP);
+				push(&secondary, *temp_proc);
 			}
 		}else{
 			if(temp_proc->runtime == 1){

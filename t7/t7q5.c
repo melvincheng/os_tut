@@ -38,6 +38,10 @@ int main(void){
 		temp_process.pid = 0;
 		// printf("%s %d %d %d\n", temp_process.name, temp_process.priority, temp_process.pid, temp_process.runtime);
 		push(temp_process);
+		while(temp != NULL){
+			printf("Name: %s\n Priority: %d\n Pid: %d\n Runtime: %d\n\n", temp->process.name, temp->process.priority, temp->process.pid, temp->process.runtime);
+			temp = temp->next;
+		}
 	}
 	fclose(fp);
 

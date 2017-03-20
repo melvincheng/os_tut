@@ -49,11 +49,8 @@ void insert(proc temp_proc){
 	child_node = malloc(sizeof(proc_tree));
 	child_node->left = NULL;
 	child_node->right = NULL;
-	
-	strcpy(child_node->process.parent, temp_proc.parent);
-	strcpy(child_node->process.name, temp_proc.name);
-	child_node->process.priority = temp_proc.priority;
-	child_node->process.memory = temp_proc.memory;
+
+	child_node->process = temp_proc;
 
 
 	if(head == NULL){

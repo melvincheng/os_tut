@@ -151,3 +151,17 @@ proc *pop(queue **list){
 	*list = new_head;
 	return proc_popped;
 }
+
+int mem_avail(proc **process){
+	proc *temp_proc;
+	int index;
+
+	temp_proc = *process;
+
+
+	for(int i = 0; i < MEMORY; i++){
+		if(avail_mem[i] == 0){
+			index = i;
+		}
+	}
+}

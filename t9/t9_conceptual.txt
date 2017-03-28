@@ -1,0 +1,14 @@
+1. Explain what OpenMP is, what are it’s benefits?
+	- OpenMP is an API that supports multi-threading. The benefits of OpenMP is that it is easier to implement.
+
+2. What are the #pragma ​definitions, what do they do?
+	- #pragma are compiler directives that tell the compiler to compile the next block of code a specific way.
+
+3. Write the OpenMP #pragma definition to execute a loop in parallel.
+	- #pragma parallel for
+
+4. What does the reduction​ do in the #pragma definition in OpenMP?
+	- Reduction allows arithmetic operations to perform without race conditions
+
+5. Explain the critical ​and private()​ declarations used in OpenMP.
+	- critical declartions are used for critical regions. The next block of code after a critical declaration can only be access by the 1 thread at a time. the private() declaration is used to indicate which variables will have a local scope in each thread.

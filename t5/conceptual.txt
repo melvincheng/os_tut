@@ -1,0 +1,36 @@
+1. Read the pthread documentation and explain the following three functions:
+pthread_create, pthread_join, pthread_exit.
+
+pthread_create: Creates a new thread and assigns it a task based on the given arguments
+pthread_join: Blocks parent thread until child thread finishes executing and allows access to child thread's return value.
+pthread_exit: Terminates the calling thread and allows any joining threads access to its value.
+
+2. Explain how the memory of threads work in comparison to processes, do threads
+share the same memory, can threads access the memory of other threads?
+
+Threads run in a shared memory space, and processes run in their own memory space. Threads share the same memory,
+which can cause race conditions, and threads can access the memory of other threads.
+
+3. Name the differences between multithreading​ and multiprocessing​ (multiple
+processes). What are the advantages and disadvantages of each?
+
+Multithreading is the act of using multiple threads to execute a task, whereas multiprocessing uses multiple processes.
+Since processes run in their own memory space it is more difficult to share data between multiple processes, but since threads
+share memory space, passing data between threads is very easy. However, multithreading requires global locks to prevent race conditions
+whereas multiprocessing does not need a global lock.
+
+4. Provide an explanation of mutual exclusion​, what is a critical section?
+
+Mutual exclusion is the act of only allowing a single thread access to a critical section of a program
+at any given time. The critical section is a section of code that contains data that can be accessed by multiple
+threads e.g. a global variable. If threads are allowed to access critical data at any time then race conditions 
+are created and the outcome of the program can change dramatically depending on how the scheduling algorithm 
+allows threads to access to the critical section.
+
+5. Research the functions used to perform mutual exclusion​ with pthreads and
+explain the purpose of each function.
+
+pthread_mutex_init: Initializes a mutex lock for pthreads.
+pthread_mutex_lock: Sets the mutex lock to locked, preventing other threads from accessing the critical data.
+pthread_mutex_unlock: Sets the mutex lock to unlocked, allowing the next thread to access the critical data.
+pthread_mutex_delete: Deletes the mutex lock.

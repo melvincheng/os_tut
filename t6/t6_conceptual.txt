@@ -1,0 +1,57 @@
+1. What is fork()​, how does it differ from multi-threading (pthreads)?
+	fork() is a function that creates a new child process that is 
+	identical to the process that called it. This process then 
+	executes any code after the fork(). Threads on the other hand
+	must be explicitly told what code to execute.
+
+2. What is inter-process communication (IPC​)? Describe methods of performing
+IPC.
+	Inter-process communication is when two processes send messages between 
+	each other in order to communicate. Some examples of IPC are one process
+	writing a file, then having another process read that file. Processes
+	can also communicate by sending signals to control what other processes
+	do.
+
+3. Provide an explanation of semaphores​, how do they work, how do they differ
+from mutual exclusion?
+	Semaphores are variables used to control access to critical sections of 
+	code between processes. When a process wants access to a critical section,
+	it sends a signal to the semaphore and waits for the semaphore to send
+	a signal back that allows it to access the critical section. Semaphores
+	differ from mutexs because they use signals between processes, while
+	mutexs are primarily used between threads of the same process.  
+
+4. Provide an explanation of wait (P)​ and signal (V)​.
+	wait(P) decrements the value of the semaphore if the value is not negative,
+	and uses a resource. If the semaphore becomes negative then the process that 
+	caused it to go negative is blocked and put in the semaphore's waiting queue
+	until the semaphore is positive again.
+	signal(V) increments the value of the semaphore. If the increment causes the
+	semaphore to become positive, then there is a freed resource and one of the
+	processes in the waiting queue is put into the ready queue.
+
+5. Research the main functions used for semaphores in <semaphore.h>​ and
+explain each function.
+	int    sem_close(sem_t *);
+		Closes the semaphore for the process that called it, any further calls
+		for the semaphore by the process will fail.
+	int    sem_destroy(sem_t *);
+		Destroys a semaphore created by sem-init().
+	int    sem_getvalue(sem_t *, int *);
+		Gets the value of the semaphore in the argument without affecting the
+		state of the semaphore.
+	int    sem_init(sem_t *, int, unsigned int);
+		Initialises an unnamed semaphore reffered to by the sem_t argument.
+	sem_t *sem_open(const char *, int, ...);
+		Establishes a connection between a semaphore and a process so that the
+		process can use the semaphore.
+	int    sem_post(sem_t *);
+		Unlocks a semaphore. If the return value is positive then no threads
+		were waiting for the semaphore and the semaphore value is incremented.
+	int    sem_trywait(sem_t *);
+		Locks a semaphore only if it is currently unlocked.
+	int    sem_unlink(const char *);
+		Removes the semaphore that corresponds to the name given in the argument.
+	int    sem_wait(sem_t *)
+		Locks the semaphore. If the semaphore value is currently zero, then the 
+		calling process will not return until the semaphore is locked.

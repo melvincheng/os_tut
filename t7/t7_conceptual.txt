@@ -1,0 +1,80 @@
+1. What are signals, what is their purpose?
+	Signals are a form of inter-process communication that allows one process
+	to control what another process does. A process can pause, continue,
+	interrupt, terminate, etc. another process by sending it the 
+	corresponding signal.
+
+2. Explain the following signals: SIGINT, SIGTSTP, SIGCONT ​how can they be
+used to suspend, resume, and terminate a program?
+	SIGINT: Sends a signal to a process that interrupts its execution. Similar
+	to using ^C to interrupt a program in the terminal.
+	SIGTSTP: Sends a signal to a process that pauses its execution. Similar to 
+	calling pause() in the process.
+	SIGCONT: Sends a signal to a process that unpauses its execution. Similar to
+	hitting enter to resume a program after it calls pause().
+
+3. Explain the following functions: kill(), waitpid()​ how can they be used to
+terminate a process and wait until it has ended before continuing?
+	kill(): Takes two arguments, the pid of the target process and the signal to 
+	send to that process. Calling kill(pid, SIGKILL) will immediately terminate
+	the process, and kill(pid, SIGTERM) will allow the process to terminate
+	properly.
+	waitpid(): Takes three arguments, the pid of the target process, the int
+	that contains the status of the process and an argument list. Calling
+	wait(&status) is shorthand for waitpid(-1,&status,0). Calling 
+	while((pid = wait(&status)) > 0); will continuously loop until the
+	target process has terminated and its pid becomes -1 to signify its
+	termination.
+	Calling kill() then waitpid() consecutively allows a parent process to
+	wait until its child process terminates before continuing.
+
+4. Explain what a linked-list​ (queue) is, what does FIFO​ mean? What are the
+common operations that a linked-list must have?
+	A linked list is a data structure that contains a series of nodes. These
+	nodes contain some sort of data and a pointer to the next node in the list.
+	If a node does not have a node pointing to it then it is known as the head
+	of the list i.e. the first node in the list. The last node in the list is the
+	tail. Queues are FIFO, which means the first node pushed onto the queue
+	is the first node that gets popped off the list. Common operations that 
+	linked-lists have are:
+		-push(): puts a node on the end of the list
+		-pop(): takes a node off the end of the list
+		-printlist(): traverses the list and outputs the value of each node
+		-deletevalue(): traverses the list and deletes the node with the value given
+
+5. Explain the structure of a linked-list as implemented in C, explain how would you
+implement the operations to add and remove values from the queue?
+	A linked list in C is implemented recursively, with a queue struct. This struct
+	contains the node value(s) and a pointer to another queue struct. The pseudocode
+	to add to a queue looks like this:
+		void push(value)
+		{
+			node* current_node = head;
+			while(current_node->nextNode != NULL)
+				current_node = current_node->nextNode;
+			node* newNode;
+			newNode->val = value;
+			newNode->nextNode = NULL;
+			current_node->nextNode = newNode;
+		}
+	You iterate through the list until you reach the last node. Then you create a new node
+	with the given value, and point the last node of the list to the new node.
+	Removing values from a list traverse the queue in a similar way.
+			value pop()
+		{
+			if(head->nextNode == NULL)
+			{
+				value = head->val;
+				head = NULL;
+			}
+			else
+			{
+				node* next_node = head->next;
+				value = head->val;
+				head = NULL;
+				head = next_node;
+			}
+		}
+	You check if the head node is the ony node. If so then you return its value and set head
+	to null. Otherwise you set the node pointed to by head as the new head, and return the original
+	head's value.

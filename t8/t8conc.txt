@@ -1,0 +1,48 @@
+1. What is an Abstract Data Type (ADT)?
+	An abstract data type is a data type that is defined by its semantics
+	from the point of view of the user, not the implementer, and are not 
+	concrete representations of data. They are defined by their possible 
+	values and operations.
+
+2. Explain the difference between a queue (FIFO) and a stack (LIFO).
+	A queue goes through values in the order they are pushed onto 
+	the queue. Stacks use the most recent value that was pushed
+	onto it first. If you have some data d1 ... dn, a queue would
+	look like this:
+	d1<-d2<-...<-dn, and will go from d1 to dn. A stack would look 
+	like this:
+	d1->d2->...->dn, and will go from dn to d1.
+	
+
+3. Name and briefly explain three types of data structures.
+	Trees, which are a branching collection of parent nodes that are 
+	connected to children nodes. Trees begin at a root node and branch
+	from there.
+
+	Hashtables, which are tables that map some data to other data. Similar
+	to a regular array, only instead of mapping an int to some other data,
+	you can use any data type in lieu of the int. e.g. String: String -> double,
+	double: double -> Object, String: String -> String.
+
+	Linked list, which is a collection of nodes that point to the next node
+	in the list. Basically a one dimensional tree.
+
+4. Explain what a binary tree is, what are some common operations of a binary
+tree?
+	Binary trees are trees where each parent node has at most 2 child nodes.
+	Common operations include:
+	addNode(parent,child): adds child node to the parent node in the tree.
+	removeNode(node): removes a node from the tree.
+	dfs(): performs a depth first search through the tree, travels down each
+	branch of the tree from left to right.
+	bfs(): performs a breadth first search throug the tree, travels across
+	each level of the tree from left to right. 
+
+5. Explain what a hash table (dictionary) is, what are common operations of a hash
+table?
+	A hashtable maps some data to other data in a table. Allows a programmer to 
+	relate any two data types together.
+	Common operations include:
+	insert(key, data): maps data to the key in the table.
+	getValue(key): returns the data that key is mapped to.
+	getKeys(): returns all the keys in the table.

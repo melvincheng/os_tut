@@ -1,0 +1,20 @@
+1. 	r - read
+	w - write
+	r+ or w+ - read and write w+ creates new file or overwrites whereas r+ will only read and write if the file exists
+	a - append
+
+2.
+	The heap is used for dynamic memory. Memory in the stack are allocated during function calls and then freed up after the function exits, memory here is managed automatically, whereas memory in the heap can be allocated at anytime, and is managed manually.
+
+3.
+	A pointer is something that points to a memory location.
+	char *name;
+	char name2 = 'a';
+	name = &name2;
+	printf("%c\n", *name);
+
+4. 
+	Malloc allocates memory in the heap and then returns a pointer to the location. Free frees up the memory that the variable was using.
+
+5.
+	Calloc allocates data and then fills it with 0s whereas malloc does not

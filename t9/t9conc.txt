@@ -1,0 +1,24 @@
+1. Explain what OpenMP is, what are it’s benefits?
+	OpenMP is a multithreading and shared process api that can be
+	used in C, C++ and FORTRAN. It allows for easy use of threads
+	that automatically execute in parallel using safe handling
+	of critical resources.
+2. What are the #pragma ​definitions, what do they do?
+	A standardized form of comments that are read by the compiler.
+	The compiler then takes the pragma syntax and uses that to 
+	compile code that corresponds to the syntax.
+3. Write the OpenMP #pragma definition to execute a loop in parallel.
+	#pragma omp parallel for
+	{ ... }
+4. What does the reduction​ do in the #pragma definition in OpenMP?
+	The reduction creates private copies of the list variables for 
+	each thread created. After all the threads are done executing,
+	the reduction combines each private copy and reduces them into
+	a single variable.
+5. Explain the critical ​and private()​ declarations used in OpenMP.
+	Critical denotes a critical section of the code for a thread,
+	and automatically handles locks for each thread. Private() 
+	creates a seperate copy of each variable in the list for
+	every thread. For example private(x), will create copies of x 
+	defined as x_1,...,x_n for n threads, where each x_i belongs
+	to thread i and is a copy of x exclusive to that thread.
